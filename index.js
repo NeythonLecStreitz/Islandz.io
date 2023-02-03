@@ -6,8 +6,8 @@ canvas.height = window.innerHeight
 
 const player = new Player({
     position: {
-        x: (Math.floor(canvas.width / 50) / 2) * 50 - 25,
-        y: (Math.floor(canvas.height / 50) / 2) * 50 - 25
+        x: (Math.floor(canvas.width / 50) / 2) * 50 -25,
+        y: (Math.floor(canvas.height / 50) / 2) * 50 -25
     },
     radius: 25,
     color: 'blue'
