@@ -4,14 +4,8 @@ const c = canvas.getContext('2d')
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 
-const player = new Player({
-    position: {
-        x: (Math.floor(canvas.width / 50) / 2) * 50 -25,
-        y: (Math.floor(canvas.height / 50) / 2) * 50 -25
-    },
-    radius: 25,
-    color: 'blue'
-})
+const player = new Player()
+console.log(player)
 
 const keys = {
     w: {
@@ -29,8 +23,8 @@ const keys = {
 }
 
 function animate() {
-    c.clearRect(0, 0, canvas.width, canvas.height);
     window.requestAnimationFrame(animate)
+    c.clearRect(0, 0, canvas.width, canvas.height)
     player.draw()
     if (keys.w.pressed && lastKey === 'w') {
         player.position.y -= 50

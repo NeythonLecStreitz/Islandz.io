@@ -1,16 +1,33 @@
 class Player {
-    constructor({position, velocity, radius, color}) {
-        this.position = position
-        this.velocity = velocity
-        this.radius = radius
-        this.color = color
+    constructor() {
+        this.position = {
+            x: canvas.width / 2,
+            y: canvas.height / 2
+        }
+
+        this.velocity = {
+            x: 0,
+            y: 0
+        }
+
+        const image = new Image()
+        image.src = "./assets/player_sprites/handgun/idle/survivor-idle_handgun_0.png"
+        image.onload = () => {
+            const scale = .5
+            this.image = image
+            this.width = image.width * scale
+            this.height = image.height * scale
+        }
     }
 
     draw() {
-        c.beginPath()
-        c.arc(this.position.x, this.position.y, this.radius, 0, Math.PI * 2, false)
-        c.fillStyle = this.color
-        c.fill()
+        if (this.image) {
+            c.drawImage(
+                this.image, 
+                this.position.x, this.position.y, 
+                this.width, this.height)
+        }
+       
     }
 }
 
