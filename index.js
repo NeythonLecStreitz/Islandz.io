@@ -47,7 +47,6 @@ function animate() {
     else if (keys.d.pressed && lastKey === 'd'){
         player.position.x += player.speed
     }
-    update_position_http('none')
 }
 animate()
 
@@ -75,6 +74,7 @@ window.addEventListener("keydown", (e) => {
             lastKey = 'd'
             break
     }
+    update_position_http('none')
 })
 
 window.addEventListener("keyup", (e) => {
@@ -92,6 +92,7 @@ window.addEventListener("keyup", (e) => {
             keys.d.pressed = false
             break
     }
+    update_position_http('none')
 })
 function update_position_http(direction) {
 
