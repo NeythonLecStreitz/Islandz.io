@@ -47,6 +47,7 @@ function animate() {
     else if (keys.d.pressed && lastKey === 'd'){
         player.position.x += player.speed
     }
+    update_position_http('none')
 }
 animate()
 
@@ -58,17 +59,17 @@ window.addEventListener("keydown", (e) => {
             y -= 1
             lastKey = 'w'
             break
-        case 'left':
+        case 'a':
             keys.a.pressed = true
             x -= 1
             lastKey = 'a'
             break
-        case 'down':
+        case 's':
             keys.s.pressed = true
             y += 1
             lastKey = 's'
             break
-        case 'right':
+        case 'd':
             x += 1
             keys.d.pressed = true
             lastKey = 'd'
@@ -92,3 +93,33 @@ window.addEventListener("keyup", (e) => {
             break
     }
 })
+function update_position_http(direction) {
+
+    // Immediately move the player, to avoid lag
+    // move(direction);
+
+    // Set up the move JSON protocol
+    var json = JSON.stringify({action: "move", direction: direction, current_position: {x : player.position.x, y: player.position.y, z: player.position.z}});
+    var httpreq = new XMLHttpRequest();
+    
+    httpreq.open('POST', url);
+    httpreq.setRequestHeader("Content-Type", "application/json");
+    httpreq.setRequestHeader("Accept", "application/json");
+    httpreq.send(json);
+    console.log("old:");
+    console.log(json);
+
+    
+
+    httpreq.onreadystatechange = function() {
+        if (httpreq.readyState == XMLHttpRequest.DONE) {
+            console.log("new:");
+            console.log(httpreq.responseText);
+            response = JSON.parse(httpreq.responseText);
+            // x = response["current_position"]["x"];
+            // y = response["current_position"]["y"];
+            // z = response["current_position"]["z"];
+        }
+    }
+    return false;
+}
