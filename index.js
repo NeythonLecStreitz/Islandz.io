@@ -26,43 +26,26 @@ function animate() {
     window.requestAnimationFrame(animate)
     c.clearRect(0, 0, canvas.width, canvas.height)
     player.draw()
+
     if (keys.w.pressed && lastKey === 'w') {
-        player.position.y -= 50
-        keys.w.pressed = false          
+        player.position.y -= player.speed
+        player.image.rotate(Math.PI)
     }
-    else if (keys.a.pressed && lastKey === 'a') {
-        player.position.x -= 50
-        keys.a.pressed = false
+    else if (keys.a.pressed && lastKey === 'a'){
+        player.position.x -= player.speed
     }
-    else if (keys.s.pressed && lastKey === 's') {
-        player.position.y += 50
-        keys.s.pressed = false
+    else if (keys.s.pressed && lastKey === 's'){
+        player.position.y += player.speed
     }
-    else if (keys.d.pressed && lastKey === 'd') {
-        player.position.x += 50
-        keys.d.pressed = false
+    else if (keys.d.pressed && lastKey === 'd'){
+        player.position.x += player.speed
     }
 }
 animate()
 
 let lastKey = ''
-window.addEventListener("keydown", (function(canMove) {
-    return function(e) {
-      if (!canMove) return false;
-      canMove = false;
-      setTimeout(function() { canMove = true; }, 150);
-      switch (e.key) {
-        case 'w': return move("w");
-        case 'a': return move("a");
-        case 's': return move("s");
-        case 'd': return move("d");
-      }  
-    };
-  })(true), false);
-  
-function move(direction) {
-    console.log(direction)
-    switch(direction) {
+window.addEventListener("keydown", (e) => {
+    switch (e.key) {
         case 'w':
             keys.w.pressed = true
             lastKey = 'w'
@@ -80,4 +63,21 @@ function move(direction) {
             lastKey = 'd'
             break
     }
-}
+})
+
+window.addEventListener("keyup", (e) => {
+    switch (e.key) {
+        case 'w':
+            keys.w.pressed = false
+            break
+        case 'a':
+            keys.a.pressed = false
+            break
+        case 's':
+            keys.s.pressed = false
+            break
+        case 'd':
+            keys.d.pressed = false
+            break
+    }
+})

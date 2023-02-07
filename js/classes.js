@@ -5,10 +5,7 @@ class Player {
             y: canvas.height / 2
         }
 
-        this.velocity = {
-            x: 0,
-            y: 0
-        }
+        this.speed = 3
 
         const image = new Image()
         image.src = "./assets/player_sprites/handgun/idle/survivor-idle_handgun_0.png"
