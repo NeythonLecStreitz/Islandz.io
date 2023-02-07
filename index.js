@@ -1,6 +1,13 @@
 const canvas = document.querySelector('canvas')
 const c = canvas.getContext('2d')
 
+// Player Position
+var x = 0;
+var y = 0;
+var z = 0;
+// Server URL + Port
+const url='http://147.182.246.194:8008';
+
 canvas.width = window.innerWidth
 canvas.height = window.innerHeight
 
@@ -48,17 +55,21 @@ window.addEventListener("keydown", (e) => {
     switch (e.key) {
         case 'w':
             keys.w.pressed = true
+            y -= 1
             lastKey = 'w'
             break
-        case 'a':
+        case 'left':
             keys.a.pressed = true
+            x -= 1
             lastKey = 'a'
             break
-        case 's':
+        case 'down':
             keys.s.pressed = true
+            y += 1
             lastKey = 's'
             break
-        case 'd':
+        case 'right':
+            x += 1
             keys.d.pressed = true
             lastKey = 'd'
             break
