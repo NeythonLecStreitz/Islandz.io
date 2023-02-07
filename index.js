@@ -68,11 +68,14 @@ window.addEventListener("keydown", (function(canMove) {
   })(true), false);
 
 function move_http(direction) {
-    // Set up the move JSON protocol
-    var json = JSON.stringify({action: "move", direction: direction, current_position: {x : x, y: y, z: z}});
 
     // Immediately move the player, to avoid lag
     move(direction);
+    
+    // Set up the move JSON protocol
+    var json = JSON.stringify({action: "move", direction: direction, current_position: {x : x, y: y, z: z}});
+
+    
 
     var httpreq = new XMLHttpRequest();
     
@@ -90,10 +93,9 @@ function move_http(direction) {
             console.log("new:");
             console.log(httpreq.responseText);
             response = JSON.parse(httpreq.responseText);
-            x = response["current_position"]["x"];
-            y = response["current_position"]["y"];
-            z = response["current_position"]["z"];
-            move(direction);
+            // x = response["current_position"]["x"];
+            // y = response["current_position"]["y"];
+            // z = response["current_position"]["z"];
         }
     }
     return false;
@@ -104,17 +106,21 @@ function move(direction) {
     switch(direction) {
         case 'up':
             keys.w.pressed = true
+            y -= 1
             lastKey = 'w'
             break
         case 'left':
             keys.a.pressed = true
+            x -= 1
             lastKey = 'a'
             break
         case 'down':
             keys.s.pressed = true
+            y += 1
             lastKey = 's'
             break
         case 'right':
+            x += 1
             keys.d.pressed = true
             lastKey = 'd'
             break
