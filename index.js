@@ -104,7 +104,7 @@ function update_position_http(direction) {
     var httpreq = new XMLHttpRequest();
     // NOTE: to eliminate CORS preflight headers, we can change content type to text/plain instead of application/json
     httpreq.open('POST', url);
-    httpreq.setRequestHeader("Content-Type", "application/json");
+    httpreq.setRequestHeader("Content-Type", "text/plain");
     httpreq.setRequestHeader("Accept", "application/json");
     httpreq.send(json);
     console.log("old:");
