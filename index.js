@@ -102,7 +102,7 @@ function update_position_http(direction) {
     // Set up the move JSON protocol
     var json = JSON.stringify({action: "move", direction: direction, current_position: {x : player.position.x, y: player.position.y, z: player.position.z}});
     var httpreq = new XMLHttpRequest();
-    
+    // NOTE: to eliminate CORS preflight headers, we can change content type to text/plain instead of application/json
     httpreq.open('POST', url);
     httpreq.setRequestHeader("Content-Type", "application/json");
     httpreq.setRequestHeader("Accept", "application/json");
